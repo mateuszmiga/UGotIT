@@ -26,9 +26,17 @@ namespace WebScraper
         {
             var web = new HtmlWeb();
             var formattedProductName = productName.Replace(' ', '+');
-            
-            var doc = web.Load(BaseUrl + formattedProductName);
-            var url = doc.DocumentNode.SelectNodes("//*[@id=\"search\"]/div[1]/div[1]/div/span[1]/div[1]/div[6]/div/div/div/div/div[2]/div[1]/h2/a");
+
+            try
+            {
+                var doc = web.Load(BaseUrl + formattedProductName);
+                var url = doc.DocumentNode.SelectNodes("//*[@id=\"search\"]/div[1]/div[1]/div/span[1]/div[1]/div[6]/div/div/div/div/div[2]/div[1]/h2/a").FirstOrDefault();
+                return url.QuerySelector("a").Attributes["href"].Value;
+            }
+            catch (Exception)
+            {
+                return "can't find product!";
+            }            
         }
     }
 }
