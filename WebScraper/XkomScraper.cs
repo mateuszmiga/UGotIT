@@ -9,6 +9,11 @@ namespace WebScraper
 {
     public class XkomScraper : IDataScraper
     {
+        public string GetUrl(string productName)
+        {
+            throw new NotImplementedException();
+        }
+
         public ICollection<Review> GetReviews(string productName)
         {
             throw new NotImplementedException();

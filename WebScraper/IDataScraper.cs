@@ -10,6 +10,7 @@ namespace WebScraper
     public interface IDataScraper
     {
         
+        string GetUrl(string productName);
         public ICollection<Review> GetReviews(string productName);
     }
 }

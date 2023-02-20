@@ -9,6 +9,10 @@ namespace WebScraper
 {
     public class OpineoScraper : IDataScraper
     {
+        public string GetUrl(string productName)
+        {
+            throw new NotImplementedException();
+        }
         public ICollection<Review> GetReviews(string productName)
         {
             throw new NotImplementedException();

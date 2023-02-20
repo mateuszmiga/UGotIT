@@ -14,7 +14,8 @@ namespace UGotIT.Services
         public ICollection<Review> GetAllReviews(string productName)
         {
             List<Review> reviews = new List<Review>();
-            
+
+
             reviews.AddRange(Allegro.GetReviews(productName));
             reviews.AddRange(Amazon.GetReviews(productName));
             reviews.AddRange(Ceneo.GetReviews(productName));
