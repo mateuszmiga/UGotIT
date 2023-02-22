@@ -15,11 +15,33 @@ namespace WebScraper
 
         public ICollection<Review> GetReviews(string productName)
         {
-            var web = new HtmlWeb();
-            var doc = web.Load(ReturnProductPageUrl(productName));
+            if (productName != string.Empty)
+            {
+                var reviews = new List<Review>();
 
-            var content = doc.QuerySelectorAll("span[\"global-reviews-all\"]");
-            throw new NotImplementedException();
+                var web = new HtmlWeb();
+                var url = ReturnProductPageUrl(productName);
+                var doc = web.Load(url);
+
+                var reviewNodes = doc.QuerySelectorAll(".a-section.review.aok-relative");
+
+                foreach (var reviewNode in reviewNodes)
+                {
+                    var review = new Review();
+                    review.UserName = reviewNode.QuerySelector(".a-profile-name").InnerText;
+                    review.ReviewContent = reviewNode.QuerySelector(".a-expander-content.reviewText.review-text-content.a-expander-partial-collapse-content").QuerySelector("span").InnerText;
+                    review.SourcePage = url;
+                    review.Rating = reviewNode.QuerySelector(".a-icon-alt").InnerText;
+
+                    reviews.Add(review);
+                }
+
+                return reviews;
+            }
+            else
+            {
+                return new List<Review>(); //return empty collection
+            }
         }
 
         private static string ReturnProductPageUrl(string productName) 
@@ -58,13 +80,13 @@ namespace WebScraper
                 }
                 else
                 {
-                    return "cannot find product on Amazon. Try to precise your search keyword";
+                    return string.Empty;
                 }
             }
 
             catch (NullReferenceException)
             {
-                return "cannot find product on Amazon. Try to precise your search keyword";
+                return string.Empty;
             }
         }
     }
