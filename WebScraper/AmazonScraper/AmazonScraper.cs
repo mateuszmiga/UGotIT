@@ -9,10 +9,7 @@ using WebScraper.Models;
 namespace WebScraper.AmazonScraper
 {
     public class AmazonScraper : IDataScraper
-    {
-        private const string BaseUrl = "https://www.ceneo.pl/;szukaj-";
-        private const string BaseUrlParam = "?nocatnarrow=1";
-
+    {        
         public ICollection<Review> GetReviews(string productName)
         {            
             var url = ReturnProductPageUrl(productName);
