@@ -20,7 +20,7 @@ namespace WebScraper.AmazonScraper
             return reviews;
         }
 
-        private static string ReturnProductPageUrl(string productName)
+        private string ReturnProductPageUrl(string productName)
         {
             //strategy pattern
             IFinder ceneoFinder = new CeneoFinder();
@@ -42,7 +42,7 @@ namespace WebScraper.AmazonScraper
             }
         }
 
-        private static ICollection<Review> ExtractReviewsFromProductPage(string url)
+        private ICollection<Review> ExtractReviewsFromProductPage(string url)
         {
             if (url != string.Empty)
             {
