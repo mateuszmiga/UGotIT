@@ -4,47 +4,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WebScraper.Models;
 
-namespace WebScraper
+namespace WebScraper.AmazonScraper
 {
-    public class AmazonScraper : IDataScraper
+    internal class CeneoFinder : IFinder
     {
         private const string BaseUrl = "https://www.ceneo.pl/;szukaj-";
         private const string BaseUrlParam = "?nocatnarrow=1";
 
-        public ICollection<Review> GetReviews(string productName)
-        {
-            if (productName != string.Empty)
-            {
-                var reviews = new List<Review>();
-
-                var web = new HtmlWeb();
-                var url = ReturnProductPageUrl(productName);
-                var doc = web.Load(url);
-
-                var reviewNodes = doc.QuerySelectorAll(".a-section.review.aok-relative");
-
-                foreach (var reviewNode in reviewNodes)
-                {
-                    var review = new Review();
-                    review.UserName = reviewNode.QuerySelector(".a-profile-name").InnerText;
-                    review.ReviewContent = reviewNode.QuerySelector(".a-expander-content.reviewText.review-text-content.a-expander-partial-collapse-content").QuerySelector("span").InnerText;
-                    review.SourcePage = url;
-                    review.Rating = reviewNode.QuerySelector(".a-icon-alt").InnerText;
-
-                    reviews.Add(review);
-                }
-
-                return reviews;
-            }
-            else
-            {
-                return new List<Review>(); //return empty collection
-            }
-        }
-
-        private static string ReturnProductPageUrl(string productName) 
+        public string FindProduct(string productName)
         {
             var web = new HtmlWeb();
             var formattedProductName = productName.Replace(' ', '+');
@@ -90,4 +58,5 @@ namespace WebScraper
             }
         }
     }
+    
 }
