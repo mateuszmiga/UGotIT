@@ -19,9 +19,13 @@ namespace UGotIT.Services
         public ICollection<Review> GetAllReviews(string productUrl)
         {
             List<Review> reviews = new List<Review>();
+                        
+            ProductUrlGenerator generator = new ProductUrlGenerator();
+            
+            var pages = generator.ReturnProductPages(productUrl);
+            reviews.AddRange(Amazon.GetReviews(pages.AmazonUrl));
 
             // reviews.AddRange(Allegro.GetReviews(productName));
-            reviews.AddRange(Amazon.GetReviews(productUrl));
             //reviews.AddRange(Ceneo.GetReviews(productName));
             //reviews.AddRange(Opineo.GetReviews(productName));
             // reviews.AddRange(Xkom.GetReviews(productName));
