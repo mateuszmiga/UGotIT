@@ -21,7 +21,7 @@ namespace WebScraper.Finder
             var productNodes = ceneoProductPage.QuerySelectorAll("#click > div:nth-child(2) > section.product-offers.product-offers--standard > ul > li ");
 
             productPages.AllegroUrl = CheckOffersAndReturnUrl(productNodes, "allegro");
-            productPages.AmazonUrl = CheckOffersAndReturnUrl(productNodes, "amazon");
+            productPages.AmazonUrl = CheckOffersAndReturnUrl(productNodes, "amazon.pl");
             productPages.XkomUrl = CheckOffersAndReturnUrl(productNodes, "x-kom");
 
             return productPages;
@@ -51,7 +51,20 @@ namespace WebScraper.Finder
             }
             else
             {                
-                return string.Empty;
+                var product = productNodes.FirstOrDefault().QuerySelector("div.product-offer__product__offer-details__name > a > span").InnerHtml;
+                
+                GoogleFinder googleFinder = new GoogleFinder();
+                var result = googleFinder.FindProduct(product, shop);
+                try
+                {
+                    return result.FirstOrDefault().Url;
+                }
+                catch (Exception)
+                {
+
+                    return string.Empty;
+                }
+                
             }
         }
     }
