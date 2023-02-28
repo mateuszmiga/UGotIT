@@ -17,7 +17,7 @@ namespace WebScraper.Finder
         public ICollection<Product> FindProduct(string productName, ShopName shopName)
         {
             var web = new HtmlWeb();
-            var formattedProductName = productName.Replace(' ', '+') + shopName.ToString();
+            var formattedProductName = productName.Replace(' ', '+') + " " + shopName.ToString();
 
             var googleSearchResultPage = web.Load(BaseUrl + formattedProductName);
             var urlsNodes = googleSearchResultPage.QuerySelectorAll("div.Z26q7c.UK95Uc.jGGQ5e > div > a");
