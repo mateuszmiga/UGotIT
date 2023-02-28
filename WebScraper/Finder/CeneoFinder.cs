@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WebScraper.AmazonScraper
+namespace WebScraper.Finder
 {
     internal class CeneoFinder : IFinder
     {
@@ -58,5 +58,5 @@ namespace WebScraper.AmazonScraper
             }
         }
     }
-    
+
 }

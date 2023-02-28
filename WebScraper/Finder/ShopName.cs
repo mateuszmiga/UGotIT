@@ -4,10 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WebScraper.AmazonScraper
+namespace WebScraper.Finder
 {
-    internal interface IFinder
+    internal enum ShopName
     {
-        string FindProduct(string productName);
+        amazon,
+        ceneo,
+        allegro,
+        xkom
     }
 }

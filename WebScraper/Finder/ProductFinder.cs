@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebScraper.Finder;
+using WebScraper.Models;
 
-namespace WebScraper.AmazonScraper
+namespace WebScraper.Finder
 {
     internal class ProductFinder : IFinder
     {
@@ -20,9 +22,9 @@ namespace WebScraper.AmazonScraper
             _finder = strategy;
         }
 
-        public string FindProduct(string productName)
+        public ICollection<Product> FindProduct(string productName, ShopName shopName)
         {
-            return _finder.FindProduct(productName);
+            return _finder.FindProduct(productName, shopName);
         }
     }
 }
