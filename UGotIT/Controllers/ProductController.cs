@@ -8,23 +8,23 @@ namespace UGotIT.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ReviewController : ControllerBase
+    public class ProductController : ControllerBase
     {
+
         private readonly IReviewService _reviewService;
 
-        public ReviewController(IReviewService reviewService)
+        public ProductController(IReviewService reviewService)
         {
             _reviewService = reviewService;
         }
-
-
-        // GET: api/<ReviewController>
+        // GET: api/<ProductController>
         [HttpGet]
-        public IEnumerable<Review> Get(string productUrl)
+        public IEnumerable<Product> GetProducts(string productName)
         {
-            IEnumerable<Review> reviews = _reviewService.GetAllReviews(productUrl);
-            
-            return reviews;
-        } 
+            IEnumerable<Product> products = _reviewService.GetProducts(productName);
+
+            return products;
+        }
+
     }
 }

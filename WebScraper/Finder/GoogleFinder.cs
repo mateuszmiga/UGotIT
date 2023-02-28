@@ -5,16 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WebScraper.Models;
-//using WebScraper.AmazonScraper;
+
 
 namespace WebScraper.Finder
 {
-    internal class GoogleFinder : IFinder
+    public class GoogleFinder
     {
         private const string BaseUrl = "https://www.google.pl/search?q=";
 
        
-        ICollection<Product> IFinder.FindProduct(string productName, ShopName shopName)
+        public ICollection<Product> FindProduct(string productName, ShopName shopName)
         {
             var web = new HtmlWeb();
             var formattedProductName = productName.Replace(' ', '+') + shopName.ToString();
@@ -36,14 +36,14 @@ namespace WebScraper.Finder
             
             ICollection<Product> products= new List<Product>();
 
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < urlsNodes.Count; i++)
             {
                 Product product = new Product();
                 product.Url = urls[i];
                 products.Add(product);
             }
 
-            return products;
+            return products.Take(1).ToList();
         }
     }
 }

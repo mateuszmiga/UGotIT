@@ -11,34 +11,13 @@ namespace WebScraper.AmazonScraper
 {
     public class AmazonScraper : IDataScraper
     {        
-        public ICollection<Review> GetReviews(string productName)
+        public ICollection<Review> GetReviews(string productUrl)
         {            
-            var url = ReturnProductPageUrl(productName);
-            var reviews = ExtractReviewsFromProductPage(url); 
+            var reviews = ExtractReviewsFromProductPage(productUrl); 
             return reviews;
         }
 
-        private string ReturnProductPageUrl(string productName)
-        {
-            //strategy pattern
-            IFinder ceneoFinder = new CeneoFinder();
-            IFinder googleFinder = new GoogleFinder();
-
-            ProductFinder productFinder = new ProductFinder(ceneoFinder);
-            var url = productFinder.FindProduct(productName);
-
-            if (url != string.Empty)
-            {
-                return url;
-            }
-            else
-            {
-                productFinder.SetStrategy(googleFinder);
-                url = productFinder.FindProduct(productName);
-
-                return url;
-            }
-        }
+        
 
         private ICollection<Review> ExtractReviewsFromProductPage(string url)
         {

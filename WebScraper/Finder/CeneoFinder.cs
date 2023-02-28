@@ -4,59 +4,48 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebScraper.Models;
 
 namespace WebScraper.Finder
 {
-    internal class CeneoFinder : IFinder
+    public class CeneoFinder
     {
         private const string BaseUrl = "https://www.ceneo.pl/;szukaj-";
         private const string BaseUrlParam = "?nocatnarrow=1";
 
-        public string FindProduct(string productName)
+        public ICollection<Product> FindProduct(string productName)
         {
+            var searchQuery = productName.Split(' '); 
             var web = new HtmlWeb();
             var formattedProductName = productName.Replace(' ', '+');
 
             var ceneoSearchResultPage = web.Load(BaseUrl + formattedProductName + BaseUrlParam);
-            var url = ceneoSearchResultPage.DocumentNode.SelectNodes("//*[@id=\"body\"]/div/div/div[3]/div/section/div[3]/div[1]/div/div[2]/div[1]/div[1]/div[1]/strong/a").FirstOrDefault();
+            var results = ceneoSearchResultPage.DocumentNode.SelectNodes("//*[@id=\"body\"]/div/div/div[3]/div/section/div[3]/div").Take(8);
 
-
-            var ceneoProductUrl = $"https://www.ceneo.pl{url.QuerySelector("a").Attributes["href"].Value}";
-
-            var ceneoProductPage = web.Load(ceneoProductUrl);
-            try
+            ICollection<Product> products = new List<Product>();
+            
+            foreach (var item in results)
             {
-                var productNodes = ceneoProductPage.QuerySelectorAll("#click > div:nth-child(2) > section.product-offers.product-offers--standard > ul > li ");
-
-                if (productNodes.Any(n => n.OuterHtml.Contains("amazon")))
+                if (!item.InnerHtml.Contains(searchQuery[0]))
                 {
-                    var amazonNodeUrl = productNodes.Where(o => o.OuterHtml.Contains("amazon"))
-                .FirstOrDefault()
-                .QuerySelector("a").Attributes["href"].Value;
-
-                    var redirectionPage = "https://www.ceneo.pl" + amazonNodeUrl;
-                    var amazonProductPage = web.Load(redirectionPage)
-                        .QuerySelectorAll("meta")
-                        .Where(s => s.OuterHtml.Contains("amazon"))
-                        .First()
-                        .OuterHtml
-                        .Split("url=")
-                        .FirstOrDefault(s => s.Contains("amazon"))
-                        .Split("?")
-                        .First();
-                    return amazonProductPage;
+                    continue;
                 }
-                else
+                
+                try
                 {
-                    return string.Empty;
-                }
-            }
+                    Product product = new();
+                    product.Url = "https://www.ceneo.pl" + item.QuerySelector("a").Attributes["href"].Value;
+                    product.PhotoUrl = item.QuerySelector("img").Attributes["src"].Value;
+                    product.ProductName = item.QuerySelector("img").Attributes["alt"].Value;
 
-            catch (NullReferenceException)
-            {
-                return string.Empty;
+                    products.Add(product);
+                }
+                catch (Exception)
+                {
+                    
+                }                
             }
+            return products;
         }
     }
-
 }
