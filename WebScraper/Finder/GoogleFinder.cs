@@ -5,22 +5,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WebScraper.Models;
-//using WebScraper.AmazonScraper;
+
 
 namespace WebScraper.Finder
 {
-    internal class GoogleFinder : IFinder
+    public class GoogleFinder
     {
         private const string BaseUrl = "https://www.google.pl/search?q=";
 
        
-        ICollection<Product> IFinder.FindProduct(string productName, ShopName shopName)
+        public ICollection<Product> FindProduct(string productName, string shopName)
         {
             var web = new HtmlWeb();
-            var formattedProductName = productName.Replace(' ', '+') + shopName.ToString();
+            var formattedProductName = productName.Replace(' ', '+') + " " + shopName.ToString();
 
             var googleSearchResultPage = web.Load(BaseUrl + formattedProductName);
-            var urlsNodes = googleSearchResultPage.QuerySelectorAll("div.Z26q7c.UK95Uc.jGGQ5e > div > a");
+            var urlsNodes = googleSearchResultPage.QuerySelectorAll("div.Z26q7c.UK95Uc.jGGQ5e > div > a").Take(3);
             var photoUrls = googleSearchResultPage.QuerySelectorAll("div.LicuJb.uhHOwf.BYbUcd"); //TODO
             var names = googleSearchResultPage.QuerySelectorAll("div.Z26q7c.UK95Uc.jGGQ5e > div > a"); //TODO
 
@@ -36,14 +36,14 @@ namespace WebScraper.Finder
             
             ICollection<Product> products= new List<Product>();
 
-            for (int i = 0; i < 4; i++)
+            foreach(var url in urls)
             {
                 Product product = new Product();
-                product.Url = urls[i];
+                product.Url = url;
                 products.Add(product);
             }
 
-            return products;
+            return products.Take(1).ToList();
         }
     }
 }

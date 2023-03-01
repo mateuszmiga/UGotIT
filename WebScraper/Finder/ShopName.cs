@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebScraper.Finder
 {
-    internal enum ShopName
+    public enum ShopName
     {
         amazon,
         ceneo,
