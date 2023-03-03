@@ -27,7 +27,7 @@ namespace UGotIT.Services
             //reviews.AddRange(Amazon.GetReviews(pages.AmazonUrl));
 
             // reviews.AddRange(Allegro.GetReviews(productName));
-            //reviews.AddRange(Ceneo.GetReviews(productName));
+            reviews.AddRange(Ceneo.GetReviews(pages.CeneoUrl));
             //reviews.AddRange(Opineo.GetReviews(productName));
             reviews.AddRange(Xkom.GetReviews(pages.XkomUrl));
 
