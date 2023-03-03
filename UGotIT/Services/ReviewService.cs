@@ -24,9 +24,9 @@ namespace UGotIT.Services
             ProductUrlGenerator generator = new ProductUrlGenerator();
             
             var pages = generator.ReturnProductPages(productUrl);
-            //reviews.AddRange(Amazon.GetReviews(pages.AmazonUrl));
+            reviews.AddRange(Amazon.GetReviews(pages.AmazonUrl));
 
-            // reviews.AddRange(Allegro.GetReviews(productName));
+            //reviews.AddRange(Allegro.GetReviews(productName));
             reviews.AddRange(Ceneo.GetReviews(pages.CeneoUrl));
             //reviews.AddRange(Opineo.GetReviews(productName));
             reviews.AddRange(Xkom.GetReviews(pages.XkomUrl));

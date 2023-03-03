@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WebScraper;
 using WebScraper.AmazonScraper;
+using WebScraper.XkomScraper;
 using Xunit.Abstractions;
 
 namespace UGotIt.Tests
