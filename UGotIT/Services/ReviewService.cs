@@ -3,6 +3,7 @@ using WebScraper;
 using WebScraper.AmazonScraper;
 using WebScraper.Finder;
 using WebScraper.Models;
+using WebScraper.XkomScraper;
 
 namespace UGotIT.Services
 {
@@ -23,12 +24,12 @@ namespace UGotIT.Services
             ProductUrlGenerator generator = new ProductUrlGenerator();
             
             var pages = generator.ReturnProductPages(productUrl);
-            reviews.AddRange(Amazon.GetReviews(pages.AmazonUrl));
+            //reviews.AddRange(Amazon.GetReviews(pages.AmazonUrl));
 
             // reviews.AddRange(Allegro.GetReviews(productName));
             //reviews.AddRange(Ceneo.GetReviews(productName));
             //reviews.AddRange(Opineo.GetReviews(productName));
-            // reviews.AddRange(Xkom.GetReviews(productName));
+            reviews.AddRange(Xkom.GetReviews(pages.XkomUrl));
 
             return reviews;
         }
