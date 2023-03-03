@@ -1,27 +1,32 @@
+ï»¿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using WebScraper;
 using WebScraper.AmazonScraper;
-using WebScraper.Models;
 using Xunit.Abstractions;
 
 namespace UGotIt.Tests
 {
-    public class AmazonScraperTests
+    public class AllegroScraperTests
     {
         private readonly ITestOutputHelper output;
 
-        public AmazonScraperTests(ITestOutputHelper output)
+        public AllegroScraperTests(ITestOutputHelper output)
         {
             this.output = output;
         }
 
         [Theory]
-        [InlineData("https://www.amazon.pl/Bluetooth-SoundLink-bezprzewodowy-wodoodporny-zewnêtrzny/dp/B099TJGJ91")]
-        [InlineData("https://www.amazon.pl/Sony-WH-1000XM5-bezprzewodowe-zoptymalizowane-telefonicznych/dp/B09Y2MYL5C")]
-        [InlineData("https://www.amazon.pl/Apple-iPhone-13-128-GB-ksiê¿ycowa/dp/B09G9TSXPX")]
+        [InlineData("https://allegro.pl/oferta/akumulatorowa-pilarka-tarczowa-18v-165mm-makita-12540426704")]
+        [InlineData("https://allegro.pl/oferta/kamera-zewnetrzna-wi-fi-full-hd-obrotowa-4x-zoom-13203712337")]
+        [InlineData("https://allegro.pl/oferta/roborock-s7-czarny-robot-sprzatajacy-odkurzacz-10868803887")]
         public void GetReviews_TrueUrls_ShouldNotReturnEmptyReviews(string productUrl)
         {
             //arrange
-            AmazonScraper scraper = new();            
-            
+            AllegroScraper scraper = new();
+
             //Act
             var revs = scraper.GetReviews(productUrl);
 
@@ -43,11 +48,11 @@ namespace UGotIt.Tests
         public void GetReviews_FakeUrls_ShouldReturnEmptyReviews(string productUrl)
         {
             //arrange
-            AmazonScraper scraper = new();
+            AllegroScraper scraper = new();
 
             //Act
             var revs = scraper.GetReviews(productUrl);
-           
+
             //assert
             Assert.Empty(revs);
         }

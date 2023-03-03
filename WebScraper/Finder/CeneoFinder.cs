@@ -26,7 +26,7 @@ namespace WebScraper.Finder
             
             foreach (var item in results)
             {
-                if (!item.InnerHtml.Contains(searchQuery[0]))
+                if (!item.InnerHtml.ToLower().Contains(searchQuery[0].ToLower()))
                 {
                     continue;
                 }

@@ -1,27 +1,32 @@
+ï»¿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using WebScraper;
 using WebScraper.AmazonScraper;
-using WebScraper.Models;
 using Xunit.Abstractions;
 
 namespace UGotIt.Tests
 {
-    public class AmazonScraperTests
+    public class XkomScraperTests
     {
         private readonly ITestOutputHelper output;
 
-        public AmazonScraperTests(ITestOutputHelper output)
+        public XkomScraperTests(ITestOutputHelper output)
         {
             this.output = output;
         }
 
         [Theory]
-        [InlineData("https://www.amazon.pl/Bluetooth-SoundLink-bezprzewodowy-wodoodporny-zewnêtrzny/dp/B099TJGJ91")]
-        [InlineData("https://www.amazon.pl/Sony-WH-1000XM5-bezprzewodowe-zoptymalizowane-telefonicznych/dp/B09Y2MYL5C")]
-        [InlineData("https://www.amazon.pl/Apple-iPhone-13-128-GB-ksiê¿ycowa/dp/B09G9TSXPX")]
+        [InlineData("https://www.x-kom.pl/p/1073277-dysk-ssd-wd-1tb-m2-pcie-gen4-nvme-black-sn850x.html")]
+        [InlineData("https://www.x-kom.pl/p/728431-smartfon-telefon-xiaomi-redmi-note-11s-6-64gb-graphite-gray.html")]
+        [InlineData("https://www.x-kom.pl/p/562889-dysk-zewnetrzny-ssd-samsung-portable-ssd-t7-1tb-usb-32-gen-2-czerwony.html")]
         public void GetReviews_TrueUrls_ShouldNotReturnEmptyReviews(string productUrl)
         {
             //arrange
-            AmazonScraper scraper = new();            
-            
+            XkomScraper scraper = new();
+
             //Act
             var revs = scraper.GetReviews(productUrl);
 
@@ -43,11 +48,11 @@ namespace UGotIt.Tests
         public void GetReviews_FakeUrls_ShouldReturnEmptyReviews(string productUrl)
         {
             //arrange
-            AmazonScraper scraper = new();
+            XkomScraper scraper = new();
 
             //Act
             var revs = scraper.GetReviews(productUrl);
-           
+
             //assert
             Assert.Empty(revs);
         }
