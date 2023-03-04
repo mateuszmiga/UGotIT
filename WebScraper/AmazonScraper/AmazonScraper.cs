@@ -28,18 +28,28 @@ namespace WebScraper.AmazonScraper
                 var doc = web.Load(url);
                 var reviewNodes = doc.QuerySelectorAll(".a-section.review.aok-relative");
 
-                foreach (var reviewNode in reviewNodes)
+                try
                 {
-                    var review = new Review();
-                    review.UserName = reviewNode.QuerySelector(".a-profile-name").InnerText;
-                    review.ReviewContent = reviewNode.QuerySelector(".a-expander-content.reviewText.review-text-content.a-expander-partial-collapse-content").QuerySelector("span").InnerText;
-                    review.SourcePage = url;
-                    review.Rating = reviewNode.QuerySelector(".a-icon-alt").InnerText;
+                    foreach (var reviewNode in reviewNodes)
+                    {
+                        var review = new Review();
+                        review.UserName = reviewNode.QuerySelector(".a-profile-name").InnerText;
+                        review.ReviewContent = reviewNode.QuerySelector(".a-expander-content.reviewText.review-text-content.a-expander-partial-collapse-content").QuerySelector("span").InnerText;
+                        review.SourcePage = url;
+                        review.Rating = reviewNode.QuerySelector(".a-icon-alt").InnerText;
 
-                    reviews.Add(review);
+                        reviews.Add(review);
+                    }
+
+                    return reviews;
+                }
+                catch (Exception)
+                {
+
+                    return new List<Review>();
                 }
 
-                return reviews;
+                
             }
             else
             {

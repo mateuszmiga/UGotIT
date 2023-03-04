@@ -25,16 +25,26 @@ namespace WebScraper
                 var doc = web.Load(url);
                 var reviewNodes = doc.QuerySelectorAll(".user-post.user-post__card.js_product-review");
 
-                foreach (var reviewNode in reviewNodes)
+                try
                 {
-                    var review = new Review();
-                    review.UserName = reviewNode.QuerySelector(".user-post__author-name").InnerText.Remove(0, 1);
-                    review.ReviewContent = reviewNode.QuerySelector(".user-post__text").InnerText;
-                    review.SourcePage = url;
-                    review.Rating = reviewNode.QuerySelector(".user-post__score-count").InnerText;
+                    foreach (var reviewNode in reviewNodes)
+                    {
+                        var review = new Review();
+                        review.UserName = reviewNode.QuerySelector(".user-post__author-name").InnerText.Remove(0, 1);
+                        review.ReviewContent = reviewNode.QuerySelector(".user-post__text").InnerText;
+                        review.SourcePage = url;
+                        review.Rating = reviewNode.QuerySelector(".user-post__score-count").InnerText;
 
-                    reviews.Add(review);
+                        reviews.Add(review);
+                    }
                 }
+                catch (Exception)
+                {
+
+                    return new List<Review>();
+                }
+
+                
 
                 return reviews;
             }

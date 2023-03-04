@@ -20,7 +20,7 @@ namespace WebScraper.Finder
             
             var productNodes = ceneoProductPage.QuerySelectorAll("#click > div:nth-child(2) > section.product-offers.product-offers--standard > ul > li ");
 
-            productPages.AllegroUrl = CheckOffersAndReturnUrl(productNodes, "ebay.com");
+            //productPages.AllegroUrl = CheckOffersAndReturnUrl(productNodes, "ebay.com");
             productPages.AmazonUrl = CheckOffersAndReturnUrl(productNodes, "amazon.pl");
             productPages.XkomUrl = CheckOffersAndReturnUrl(productNodes, "x-kom");
 

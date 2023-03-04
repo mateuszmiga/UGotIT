@@ -27,20 +27,29 @@ namespace WebScraper.XkomScraper
                 var doc = web.Load(url);
                 var reviewNodes = doc.QuerySelector("div.sc-1re71we-0.fOThDJ > script");
 
-                Root rootObj = JsonConvert.DeserializeObject<Root>(reviewNodes.InnerHtml);
-
-                foreach (var reviewNode in rootObj.review)
+                try
                 {
-                    var review = new WebScraper.Models.Review();
-                    review.UserName = reviewNode.author.name;
-                    review.ReviewContent = reviewNode.description;
-                    review.SourcePage = url;
-                    review.Rating = reviewNode.reviewRating.ratingValue.ToString();
+                    Root rootObj = JsonConvert.DeserializeObject<Root>(reviewNodes.InnerHtml);
 
-                    reviews.Add(review);
+                    foreach (var reviewNode in rootObj.review)
+                    {
+                        var review = new WebScraper.Models.Review();
+                        review.UserName = reviewNode.author.name;
+                        review.ReviewContent = reviewNode.description;
+                        review.SourcePage = url;
+                        review.Rating = reviewNode.reviewRating.ratingValue.ToString();
+
+                        reviews.Add(review);
+                    }
+
+                    return reviews;
                 }
+                catch (Exception)
+                {
 
-                return reviews;
+                    return new List<WebScraper.Models.Review>();
+                }
+                
             }
             else
             {
