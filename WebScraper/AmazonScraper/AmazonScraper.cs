@@ -48,7 +48,6 @@ namespace WebScraper.AmazonScraper
 
                     return new List<Review>();
                 }
-
                 
             }
             else
