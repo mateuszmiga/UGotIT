@@ -22,7 +22,7 @@ namespace UGotIt.Tests
         [Theory]
         [InlineData("https://www.x-kom.pl/p/1073277-dysk-ssd-wd-1tb-m2-pcie-gen4-nvme-black-sn850x.html")]
         [InlineData("https://www.x-kom.pl/p/728431-smartfon-telefon-xiaomi-redmi-note-11s-6-64gb-graphite-gray.html")]
-        [InlineData("https://www.x-kom.pl/p/1098712-klawiatura-bezprzewodowa-keychron-k8-o1.html")]
+        [InlineData("https://www.x-kom.pl/p/1051988-soundbar-jbl-sb160.html")]
         public void GetReviews_TrueUrls_ShouldNotReturnEmptyReviews(string productUrl)
         {
             //arrange

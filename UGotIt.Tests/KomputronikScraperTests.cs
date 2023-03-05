@@ -9,19 +9,19 @@ using Xunit.Abstractions;
 
 namespace UGotIt.Tests
 {
-    public class AllegroScraperTests
+    public class KomputronikScraperTests
     {
         private readonly ITestOutputHelper output;
 
-        public AllegroScraperTests(ITestOutputHelper output)
+        public KomputronikScraperTests(ITestOutputHelper output)
         {
             this.output = output;
         }
 
         [Theory]
-        [InlineData("https://allegro.pl/oferta/akumulatorowa-pilarka-tarczowa-18v-165mm-makita-12540426704")]
-        [InlineData("https://allegro.pl/oferta/kamera-zewnetrzna-wi-fi-full-hd-obrotowa-4x-zoom-13203712337")]
-        [InlineData("https://allegro.pl/oferta/roborock-s7-czarny-robot-sprzatajacy-odkurzacz-10868803887")]
+        [InlineData("https://www.komputronik.pl/product/694900/philips-55pus9435-12.html")]
+        [InlineData("https://www.komputronik.pl/product/705054/xiaomi-mi-true-wireless-earbuds-basic-2.html")]
+        [InlineData("https://www.komputronik.pl/product/691513/de-longhi-dinamica-ecam-353-75-w.html")]
         public void GetReviews_TrueUrls_ShouldNotReturnEmptyReviews(string productUrl)
         {
             //arrange
