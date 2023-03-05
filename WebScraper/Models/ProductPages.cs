@@ -10,7 +10,7 @@ namespace WebScraper.Models
     {
         public string CeneoUrl { get; set; }
         public string AmazonUrl { get; set; }
-        public string AllegroUrl { get; set; }
+        public string KomputronikUrl { get; set; }
         public string XkomUrl { get; set; }
     }
 }
