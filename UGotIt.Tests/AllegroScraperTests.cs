@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WebScraper;
 using WebScraper.AmazonScraper;
+using WebScraper.KomputronikScraper;
 using Xunit.Abstractions;
 
 namespace UGotIt.Tests
@@ -25,7 +25,7 @@ namespace UGotIt.Tests
         public void GetReviews_TrueUrls_ShouldNotReturnEmptyReviews(string productUrl)
         {
             //arrange
-            AllegroScraper scraper = new();
+            KomputronikScraper scraper = new();
 
             //Act
             var revs = scraper.GetReviews(productUrl);
@@ -48,7 +48,7 @@ namespace UGotIt.Tests
         public void GetReviews_FakeUrls_ShouldReturnEmptyReviews(string productUrl)
         {
             //arrange
-            AllegroScraper scraper = new();
+            KomputronikScraper scraper = new();
 
             //Act
             var revs = scraper.GetReviews(productUrl);

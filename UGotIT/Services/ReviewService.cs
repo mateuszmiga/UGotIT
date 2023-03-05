@@ -2,6 +2,7 @@
 using WebScraper;
 using WebScraper.AmazonScraper;
 using WebScraper.Finder;
+using WebScraper.KomputronikScraper;
 using WebScraper.Models;
 using WebScraper.XkomScraper;
 
@@ -9,7 +10,7 @@ namespace UGotIT.Services
 {
     public class ReviewService : IReviewService
     {
-        IDataScraper Allegro = new AllegroScraper();
+        IDataScraper Komputronik = new KomputronikScraper();
         IDataScraper Amazon = new AmazonScraper();
         IDataScraper Ceneo = new CeneoScraper();
         IDataScraper Opineo = new OpineoScraper();
@@ -26,10 +27,10 @@ namespace UGotIT.Services
             var pages = generator.ReturnProductPages(productUrl);
             //reviews.AddRange(Amazon.GetReviews(pages.AmazonUrl));
 
-            //reviews.AddRange(Allegro.GetReviews(productName));
+            reviews.AddRange(Komputronik.GetReviews(pages.KomputronikUrl));
             //reviews.AddRange(Ceneo.GetReviews(pages.CeneoUrl));
             //reviews.AddRange(Opineo.GetReviews(productName));
-            reviews.AddRange(Xkom.GetReviews(pages.XkomUrl));
+            //reviews.AddRange(Xkom.GetReviews(pages.XkomUrl));
 
             return reviews;
         }

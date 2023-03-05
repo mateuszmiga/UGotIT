@@ -23,6 +23,7 @@ namespace WebScraper.Finder
             //productPages.AllegroUrl = CheckOffersAndReturnUrl(productNodes, "ebay.com");
             productPages.AmazonUrl = CheckOffersAndReturnUrl(productNodes, "amazon.pl");
             productPages.XkomUrl = CheckOffersAndReturnUrl(productNodes, "x-kom");
+            productPages.KomputronikUrl = CheckOffersAndReturnUrl(productNodes, "komputronik");
 
             return productPages;
                 
