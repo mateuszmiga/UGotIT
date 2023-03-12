@@ -1,0 +1,27 @@
+﻿@using System.Text.Json;
+@using OpinionBlazor.Models;
+
+<h3>Products</h3>
+
+@code {
+    [Parameter]
+    public string Json { get; set; }
+
+    private Product[] Results;
+
+    protected override void OnParametersSet()
+    {
+        Results = JsonSerializer.Deserialize<Product[]>(Json);
+    }
+}
+
+@foreach (var result in Results)
+{
+    <div class="product">
+        <p>@result.ProductName</p>
+        <p>@result.PhotoUrl</p>
+        <p>@result.Url</p>
+    </div>
+}
+
+
