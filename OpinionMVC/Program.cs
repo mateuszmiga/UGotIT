@@ -8,6 +8,7 @@ namespace OpinionMVC
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddScoped<ApiClient>();
 
             var app = builder.Build();
 
