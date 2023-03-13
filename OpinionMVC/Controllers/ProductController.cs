@@ -6,12 +6,16 @@ namespace OpinionMVC.Controllers
 {
     public class ProductController : Controller
     {
-        
-        public ActionResult GetProducts(string searchTerm)
+        private readonly ApiClient _client;
+
+        public ProductController(ApiClient client)
         {
-            var model = new Product();
-            var results = new List<Product>();
-            results.Add(model);
+            _client = client;
+        }
+
+        public async Task<ActionResult> GetProducts(string searchTerm)
+        {            
+            var results = await _client.GetProducts(searchTerm);
             return View(results);                
         }
     }
