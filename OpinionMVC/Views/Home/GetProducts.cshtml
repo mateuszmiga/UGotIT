@@ -1,0 +1,28 @@
+﻿@using OpinionMVC.Models;
+@model IEnumerable<Product>
+
+@{
+    ViewData["Title"] = "GetProducts";
+}
+
+<h1>Znalezione Produkty</h1>
+
+<div class="grid-container">
+@foreach (var item in Model) {
+    <div class="grid-item">
+        <img src="@item.PhotoUrl" alt="product image" />
+        <a asp-controller="Review" asp-action="GetReviews" asp-route-url="@item.Url">@item.ProductName</a>
+        <a asp-controller="Review" asp-action="GetReviews" asp-route-url="@item.Url" class="btn btn-primary">Zobacz opinie</a>
+    </div>
+}
+</div>
+
+<style>
+    .appTitle {
+        background-color: #007bff;
+        color: white;
+        text-align: center;
+        margin-bottom: 20px;
+        padding: 20px;
+    }
+</style>

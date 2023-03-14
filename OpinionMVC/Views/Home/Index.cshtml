@@ -1,0 +1,24 @@
+﻿@using OpinionMVC.Models;
+@model SearchModel
+@{
+    ViewData["Title"] = "Home Page";
+    string str;
+}
+
+<div class="appTitle">
+    <h1>OpiniON</h1>
+</div>
+
+<p1 class="slogan">Ponieważ każda opinia ma zanczenie!</p1>
+<form asp-controller="Home" asp-action="GetProducts">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="form-group">        
+        <input asp-for="query" class="form-control" />
+        <span asp-validation-for="query" class="text-danger"></span>
+    </div>            
+
+    <div class="form-group">
+        <input type="submit" value="Search" class="btn-search" />
+    </div>
+</form>

@@ -1,0 +1,40 @@
+﻿@page "/"
+@using OpinionBlazor.Utilities;
+@using System.Net;
+@using System.Text.Json;
+@inject PageNavigator navigator;
+
+<PageTitle>Index</PageTitle>
+<div class="appTitle">
+    <h1>OpiniON</h1>
+</div>
+
+<p1 class="slogan">Ponieważ każda opinia ma zanczenie!</p1>
+<div class="finder">
+    <input type="text" @bind-value="@searchTerm" />
+    <button @onclick="@Search">Szukaj</button>    
+</div>
+
+@code{
+    private string searchTerm;
+
+
+
+    private async Task Search()
+    {
+        // utwórz nowy obiekt HttpClient
+        using var client = new HttpClient();
+        //var navigator = new PageNavigator();        
+        // wykonaj request GET z parametrem q
+
+        var response = await client.GetAsync($"https://localhost:7042/api/Product?productName={searchTerm}");
+        var jsonData = JsonSerializer.Serialize(response);
+        var encodedData = WebUtility.UrlEncode(jsonData);
+
+        var url = $"/products?json={encodedData}";
+
+        // przekieruj na stronę results i przekaż wynik w formacie JSON
+        navigator.NavigateTo(url);
+    }
+}
+
