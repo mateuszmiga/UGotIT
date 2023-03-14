@@ -1,0 +1,104 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  header {
+    background-color: #1E90FF;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+  }
+  
+  nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
+  
+  nav ul li {
+    margin-right: 20px;
+  }
+  
+  nav ul li a {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  .search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    width: 100%;
+  }
+  
+  input[type=text] {
+    padding: 14px 20px;
+    border: none;
+    border-radius: 40px;
+    font-size: 16px;
+    background-color: #f8f8f8;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    flex: 1;
+  }
+  
+  button[type=submit] {
+    position: absolute;
+    right: 0;
+    background-color: #fff;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    padding: 12px;
+  }
+  
+  button[type=submit]:hover {
+    background-color: #f8f8f8;
+  }
+  
+  button[type=submit]:focus {
+    outline: none;
+  }
+  
+  .fa-search {
+    color: #333;
+  }
+  
+  article div{
+    margin-bottom: 40px;
+    display: none;
+  }
+  
+  article h2 {
+    margin-top: 0;
+  }
+  
+  .author-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  article img {
+    width: 150px;
+    height: 150px;
+    border-radius: 30%;
+    margin-right: 10px;
+  }
+  
+  footer {
+    background-color: #f1f1f1;
+    padding: 10px 20px;
+    text-align: center;
+  }
