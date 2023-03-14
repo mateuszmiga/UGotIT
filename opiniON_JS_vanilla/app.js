@@ -10,36 +10,38 @@ input.addEventListener("keyup", function(event) {
 
 function submitInput() {
   const userInput = input.value;
-  console.log(userInput)
+  console.log(userInput);
   searchContainer.classList.add("hidden");
+  renderProducts(userInput);
 }
 
 
+const url = "https://localhost:7042/api/Product?productName=";
 
-const opinionsUrl = "https://example.com/api/opinions";
 
-async function getOpinions() {
+async function getProducts(userInput) {
+  const productsUrl = `${url}${userInput}`;
   try {
-    const response = await fetch(opinionsUrl);
-    const opinions = await response.json();
-    return opinions;
+    const response = await fetch(productsUrl);
+    const products = await response.json();
+    return products;
   } catch (error) {
     console.error(error);
   }
 }
 
-async function renderOpinions() {
-  const opinions = await getOpinions();
-  const opinionsContainer = document.getElementById("opinions");
-  opinions.forEach(opinion => {
-    const opinionElement = document.createElement("div");
-    opinionElement.classList.add("opinion");
-    opinionElement.innerHTML = `
-      <h2>${opinion.title}</h2>
-      <p>${opinion.content}</p>
-      <p>By ${opinion.author}</p>
+async function renderProducts(userInput) {
+  const products = await getProducts(userInput);
+  const productContainer = document.getElementById("products");
+  products.forEach(product => {
+    const productElement = document.createElement("div");
+    productElement.classList.add("product");
+    productElement.innerHTML = `
+      <h2>${product.productName}</h2>
+      <p>${product.photoUrl}</p>
+      <p>${product.url}</p>
     `;
-    opinionsContainer.appendChild(opinionElement);
+    productContainer.appendChild(productElement);
   });
 }
 
