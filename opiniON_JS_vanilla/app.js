@@ -1,6 +1,6 @@
 
 const input = document.getElementById("search-input");
-const searchContainer = document.querySelector("search-container");
+const searchContainer = document.querySelector(".search-container");
 
 input.addEventListener("keyup", function(event) {
   if (event.keyCode === 13) {
@@ -11,10 +11,8 @@ input.addEventListener("keyup", function(event) {
 function submitInput() {
   const userInput = input.value;
   console.log(userInput)
-
+  searchContainer.classList.add("hidden");
 }
-
-
 
 
 

@@ -9,6 +9,19 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IReviewService, ReviewService>();
+builder.Services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+
+{
+
+    builder.AllowAnyOrigin()
+
+    .AllowAnyMethod()
+
+    .AllowAnyHeader();
+
+}));
+
+
 
 var app = builder.Build();
 
@@ -24,5 +37,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseCors("MyPolicy");
 
 app.Run();
