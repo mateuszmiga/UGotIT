@@ -13,9 +13,10 @@ namespace OpinionMVC.Controllers
             _client = client;
         }
 
-        public async Task<ActionResult> GetReviews(string product)
+        
+        public async Task<ActionResult> GetReviews(string url)
         {
-            var result = await _client.GetReviews(product);
+            var result = await _client.GetReviews(url);
             
             return View(result);
         }        

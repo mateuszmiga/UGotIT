@@ -27,7 +27,7 @@
                     <img src="@item.PhotoUrl"></img>
             </td>
             <td>
-                <a asp-controller="Review" asp-action="GetReviews" >@item.ProductName</a>
+                <a asp-controller="Review" asp-action="GetReviews" asp-route-url="@item.Url">@item.ProductName</a>
                 
             </td>
         </tr>
