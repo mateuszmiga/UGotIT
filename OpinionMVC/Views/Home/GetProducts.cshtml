@@ -1,4 +1,5 @@
-﻿@model IEnumerable<WebScraper.Models.Product>
+﻿@using OpinionMVC.Models;
+@model IEnumerable<Product>
 
 @{
     ViewData["Title"] = "GetProducts";
@@ -23,10 +24,11 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                <img src="@item.PhotoUrl"></img>
+                    <img src="@item.PhotoUrl"></img>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ProductName)
+                <a asp-controller="Review" asp-action="GetReviews" >@item.ProductName</a>
+                
             </td>
         </tr>
         <tr>
@@ -36,7 +38,9 @@
         </tr>
             
         <tr>
-            
+            <td>
+                    @Html.ActionLink("Opinie", "GetReviews", "Review", new { url=item.Url })
+            </td>
         </tr>
 }
     </tbody>

@@ -1,0 +1,51 @@
+﻿@model IEnumerable<OpinionMVC.Models.Review>
+
+@{
+    ViewData["Title"] = "GetReviews";
+}
+
+<h1>GetReviews</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rating)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReviewContent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SourcePage)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rating)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReviewContent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SourcePage)
+            </td>
+            <td>
+                
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
