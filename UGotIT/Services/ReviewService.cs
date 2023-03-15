@@ -12,34 +12,33 @@ namespace UGotIT.Services
     {
         IDataScraper Komputronik = new KomputronikScraper();
         IDataScraper Amazon = new AmazonScraper();
-        IDataScraper Ceneo = new CeneoScraper();
-        IDataScraper Opineo = new OpineoScraper();
+        IDataScraper Ceneo = new CeneoScraper();        
         IDataScraper Xkom = new XkomScraper();
 
 
 
-        public ICollection<Review> GetAllReviews(string productUrl)
+        public async Task<ICollection<Review>> GetAllReviewsAsync(string productUrl)
         {
             List<Review> reviews = new List<Review>();
                         
             ProductUrlGenerator generator = new ProductUrlGenerator();
             
-            var pages = generator.ReturnProductPages(productUrl);
+            var pages =await generator.ReturnProductPages(productUrl);
 
-            reviews.AddRange(Amazon.GetReviewsAsync(pages.AmazonUrl));
-            reviews.AddRange(Komputronik.GetReviewsAsync(pages.KomputronikUrl));
-            reviews.AddRange(Ceneo.GetReviewsAsync(pages.CeneoUrl));            
-            reviews.AddRange(Xkom.GetReviewsAsync(pages.XkomUrl));
+            reviews.AddRange(await Amazon.GetReviewsAsync(pages.AmazonUrl));
+            reviews.AddRange(await Komputronik.GetReviewsAsync(pages.KomputronikUrl));
+            reviews.AddRange(await Ceneo.GetReviewsAsync(pages.CeneoUrl));            
+            reviews.AddRange(await Xkom.GetReviewsAsync(pages.XkomUrl));
 
             return reviews;
         }
 
-        public ICollection<Product> GetProducts(string productName)
+        public async Task<ICollection<Product>> GetProductsAsync(string productName)
         {
             var ceneoFinder = new CeneoFinder();
             var products = ceneoFinder.FindProduct(productName);
 
-            return products;
+            return await products;
             
         }
     }

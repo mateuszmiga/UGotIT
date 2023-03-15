@@ -14,7 +14,7 @@ namespace WebScraper.Finder
         private const string BaseUrl = "https://www.google.pl/search?q=";
 
        
-        public ICollection<Product> FindProduct(string productName, string shopName)
+        public async Task<ICollection<Product>> FindProduct(string productName, string shopName)
         {
             var web = new HtmlWeb();
             var formattedProductName = productName.Replace(' ', '+') + " " + shopName.ToString();

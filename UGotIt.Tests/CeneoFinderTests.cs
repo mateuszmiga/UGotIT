@@ -25,13 +25,13 @@ namespace UGotIt.Tests
         [InlineData("PHILIPS Ovi Smart")]
         [InlineData("Brother InkBenefit Plus")]
         [InlineData("Iphone 13 128gb")]
-        public void FindProduct_TrueProducts_ShouldReturnProducts(string productName)
+        public async Task FindProduct_TrueProducts_ShouldReturnProductsAsync(string productName)
         {
             //Arrange
             var finder = new CeneoFinder();
 
             //Act
-            var products = finder.FindProduct(productName);
+            var products = await finder.FindProduct(productName);
 
             output.WriteLine("Found : " + products.Count.ToString());
             foreach (var item in products)
