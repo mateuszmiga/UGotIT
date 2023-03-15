@@ -22,13 +22,13 @@ namespace UGotIt.Tests
         [InlineData("https://www.komputronik.pl/product/694900/philips-55pus9435-12.html")]
         [InlineData("https://www.komputronik.pl/product/705054/xiaomi-mi-true-wireless-earbuds-basic-2.html")]
         [InlineData("https://www.komputronik.pl/product/691513/de-longhi-dinamica-ecam-353-75-w.html")]
-        public void GetReviews_TrueUrls_ShouldNotReturnEmptyReviews(string productUrl)
+        public async Task GetReviews_TrueUrls_ShouldNotReturnEmptyReviewsAsync(string productUrl)
         {
             //arrange
             KomputronikScraper scraper = new();
 
             //Act
-            var revs = scraper.GetReviews(productUrl);
+            var revs =await scraper.GetReviewsAsync(productUrl);
 
             foreach (var item in revs)
             {
@@ -45,13 +45,13 @@ namespace UGotIt.Tests
         [InlineData("")]
         [InlineData("https://www.amazon.pl/")]
         [InlineData("https://www.ceneo.pl/123524030")]
-        public void GetReviews_FakeUrls_ShouldReturnEmptyReviews(string productUrl)
+        public async Task GetReviews_FakeUrls_ShouldReturnEmptyReviewsAsync(string productUrl)
         {
             //arrange
             KomputronikScraper scraper = new();
 
             //Act
-            var revs = scraper.GetReviews(productUrl);
+            var revs =await scraper.GetReviewsAsync(productUrl);
 
             //assert
             Assert.Empty(revs);

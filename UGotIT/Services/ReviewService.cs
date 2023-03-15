@@ -26,10 +26,10 @@ namespace UGotIT.Services
             
             var pages = generator.ReturnProductPages(productUrl);
 
-            reviews.AddRange(Amazon.GetReviews(pages.AmazonUrl));
-            reviews.AddRange(Komputronik.GetReviews(pages.KomputronikUrl));
-            reviews.AddRange(Ceneo.GetReviews(pages.CeneoUrl));            
-            reviews.AddRange(Xkom.GetReviews(pages.XkomUrl));
+            reviews.AddRange(Amazon.GetReviewsAsync(pages.AmazonUrl));
+            reviews.AddRange(Komputronik.GetReviewsAsync(pages.KomputronikUrl));
+            reviews.AddRange(Ceneo.GetReviewsAsync(pages.CeneoUrl));            
+            reviews.AddRange(Xkom.GetReviewsAsync(pages.XkomUrl));
 
             return reviews;
         }
