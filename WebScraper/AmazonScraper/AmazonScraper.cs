@@ -11,15 +11,15 @@ namespace WebScraper.AmazonScraper
 {
     public class AmazonScraper : IDataScraper
     {        
-        public ICollection<Review> GetReviews(string productUrl)
+        public async Task<ICollection<Review>> GetReviewsAsync(string productUrl)
         {            
             var reviews = ExtractReviewsFromProductPage(productUrl); 
-            return reviews;
+            return await reviews;
         }
 
         
 
-        private ICollection<Review> ExtractReviewsFromProductPage(string url)
+        private async Task<ICollection<Review>> ExtractReviewsFromProductPage(string url)
         {
             if (url != string.Empty)
             {

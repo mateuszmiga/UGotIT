@@ -22,9 +22,9 @@ namespace UGotIT.Controllers
 
         // GET: api/<ReviewController>
         [HttpGet]
-        public IEnumerable<Review> Get(string productUrl)
+        public async Task<IEnumerable<Review>> GetAsync(string productUrl)
         {
-            IEnumerable<Review> reviews = _reviewService.GetAllReviews(productUrl);
+            IEnumerable<Review> reviews = await _reviewService.GetAllReviewsAsync(productUrl);
             
             return reviews;
         } 
