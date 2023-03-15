@@ -25,8 +25,8 @@ namespace UGotIT.Controllers
         public async Task<IEnumerable<Review>> GetAsync(string productUrl)
         {
             IEnumerable<Review> reviews = await _reviewService.GetAllReviewsAsync(productUrl);
-            
-            return reviews;
+            var sorted = reviews.OrderByDescending(c => c.ReviewContent.Length);
+            return sorted;
         } 
     }
 }
