@@ -20,7 +20,7 @@ namespace WebScraper.Finder
             var formattedProductName = productName.Replace(' ', '+');
 
             var ceneoSearchResultPage = web.Load(BaseUrl + formattedProductName + BaseUrlParam);
-            var results = ceneoSearchResultPage.DocumentNode.SelectNodes("//*[@id=\"body\"]/div/div/div[3]/div/section/div[3]/div").Take(8);
+            var results = ceneoSearchResultPage.DocumentNode.SelectNodes("//*[@id=\"body\"]/div/div/div[3]/div/section/div[3]/div").Take(4);
 
             ICollection<Product> products = new List<Product>();
             
