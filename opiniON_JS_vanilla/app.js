@@ -3,12 +3,17 @@ const amazonLogoUrl = 'https://www.amazon.pl/ref=nav_logo';
 const x_comLogoUrl = 'https://assets.x-kom.pl/public-spa/xkom/7cbf82dd32ab7e88.svg';
 const komputronikLogoUrl = 'https://prowly-uploads.s3.eu-west-1.amazonaws.com/uploads/press_rooms/company_logos/1209/72b83a4a25be6621ae462be8af6edc3f.jpg';
 const ceneoLogoUrl = 'https://www.ceneo.pl/Content/img/icons/logo-ceneo-simple-orange.svg';
-const annemedLogoUrl = '';
+const noNameLogoUrl = '';
+const searchProductUrl = "https://localhost:7042/api/Product?productName=";
+const opinionUrl = 'https://localhost:7042/api/Review?productUrl=https%3A%2F%2F';
+let products;
 
 const input = document.getElementById("search-input");
 const searchContainer = document.querySelector(".search-container");
-const searchProductUrl = "https://localhost:7042/api/Product?productName=";
-const opinionUrl = 'https://localhost:7042/api/Review?productUrl=https%3A%2F%2F';
+let product1; 
+let product2; 
+let product3; 
+let product4; 
 
 input.addEventListener("keyup", function(event) {
   if (event.keyCode === 13) {
@@ -16,6 +21,15 @@ input.addEventListener("keyup", function(event) {
     submitInput();
   }
 });
+
+if (product1 != null) {
+  product1.addEventListener('click', function() {
+    productHandler(products[0]);
+})}
+
+// productLayout.addEventListener(click, function() {
+//   productLayout.
+// })
 
 function submitInput() {
   const userInput = input.value;
@@ -25,13 +39,17 @@ function submitInput() {
 }
 
 
+function productHandler(item){
+  console.log(item.productName);
+}
 
 
 //sending GET request with userInput searching item
 async function getProducts(userInput) {
-  const searchProductUrl = `${url}${userInput}`;
+  products = null;
+  const entireSearchProductUrl = `${searchProductUrl}${userInput}`;
   try {
-    const response = await fetch(searchProductUrl);
+    const response = await fetch(entireSearchProductUrl);
     const productsJson = await response.json();
     return productsJson;
   } catch (error) {
@@ -40,13 +58,15 @@ async function getProducts(userInput) {
 }
 
 async function renderProducts(userInput) {
-  const products = await getProducts(userInput);
+  products = await getProducts(userInput);
   console.log(products);
   const productsContainer = document.querySelector(".products");
+  let i=1;
   products.forEach(product => {
     const productElement = document.createElement("div");
 
-    productElement.classList.add("product");
+    productElement.classList.add(`product${i}`);
+    // productElement.classList.add(`${i}`);
     productElement.innerHTML = `
       <div class="product-img">
         <img src=\"https:${product.photoUrl}\">
@@ -56,8 +76,13 @@ async function renderProducts(userInput) {
         <p>${product.url}</p>
       </div>
     `;
+    i ++;
     productsContainer.appendChild(productElement);
   });
+  product1 = document.querySelector(".product1");
+  product2 = document.querySelector(".product2");
+  product3 = document.querySelector(".product3");
+  product4 = document.querySelector(".product4");
 }
 
 async function renderOpinions(userChosenProduct){
@@ -114,6 +139,6 @@ function getLogoOpinionSource(sourcePageUrl) {
   else if (sourcePageUrl.includes("x-com")) opinionSourceLogo = x_comLogoUrl;
   else if (sourcePageUrl.includes("komputronik")) opinionSourceLogo = komputronikLogoUrl;
   if (sourcePageUrl.includes("ceneo")) opinionSourceLogo = ceneoLogoUrl;
-  else opinionSourceLogo = annemedLogoUrl;
+  else opinionSourceLogo = noNameLogoUrl;
 }
 
