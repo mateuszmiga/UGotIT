@@ -32,19 +32,6 @@ function submitInput() {
 }
 
 
-//sending GET request with userInput searching item
-async function getProducts(userInput) {
-  products = null;
-  const entireSearchProductUrl = `${searchProductUrl}${userInput}`;
-  try {
-    const response = await fetch(entireSearchProductUrl);
-    const productsJson = await response.json();
-    return productsJson;
-  } catch (error) {
-    console.error(error);
-  }
-}
-
 async function renderProducts(userInput) {
   products = await getProducts(userInput);
   console.log(products);
@@ -77,24 +64,40 @@ async function renderOpinions(userChosenProduct){
   opinions.forEach(opinion =>{
     const opinionElement = document.createElement("article");
     opinionElement.classList.add("opinion");
-    productElement.innerHTML = `
-      <div>
+    opinionElement.innerHTML = `
+      <div class="logo-img">
         <img src=${getLogoOpinionSource(opinion.sourcePage)} alt="opinion provider logo">
       </div>
-      <div>
+      <div class="opinion-rating_description">
         <h2>${opinion.Rating}</h2>
-        <p>Article content goes here.</p>
-      <div class="author-info">
+        <p>${opinion.reviewContent}</p>
+      <div class="author-info">        
+        <p>${opinion.userName}</p>
+      </div>
     `;
-  })
+    opinionsContainer.appendChild(opinionElement);
+  });
 } 
+
+//sending GET request with userInput searching item
+async function getProducts(userInput) {
+  products = null;
+  const entireSearchProductUrl = `${searchProductUrl}${userInput}`;
+  try {
+    const response = await fetch(entireSearchProductUrl);
+    const productsJson = await response.json();
+    return productsJson;
+  } catch (error) {
+    console.error(error);
+  }
+}
 
 //sending GET request to obtain opinions for pointed product
 async function getOpinions(productUrl) {
   const productSlicedUrl = productUrl
-  .slice(8)
-  .replace("/","%");
-  
+  .slice(8);
+  // .replace("/","%");
+
   const getOpinionsUrl = `${opinionUrl}${productSlicedUrl}`;
   try {
     const response = await fetch(getOpinionsUrl);
