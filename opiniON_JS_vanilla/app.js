@@ -1,6 +1,6 @@
 
-const amazonLogoUrl = 'https://www.amazon.pl/ref=nav_logo';
-const x_comLogoUrl = 'https://assets.x-kom.pl/public-spa/xkom/7cbf82dd32ab7e88.svg';
+const amazonLogoUrl = 'https://img.etimg.com/thumb/msid-59738992,width-640,resizemode-4,imgsize-25499/amazon.jpg';
+const x_comLogoUrl = 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/X-kom_logo_ver2018.png/240px-X-kom_logo_ver2018.png';
 const komputronikLogoUrl = 'https://prowly-uploads.s3.eu-west-1.amazonaws.com/uploads/press_rooms/company_logos/1209/72b83a4a25be6621ae462be8af6edc3f.jpg';
 const ceneoLogoUrl = 'https://www.ceneo.pl/Content/img/icons/logo-ceneo-simple-orange.svg';
 const noNameLogoUrl = '';
@@ -16,9 +16,27 @@ const searchContainer = document.querySelector(".search-container");
 input.addEventListener("keyup", function(event) {
   if (event.keyCode === 13) {
     resetPreviousSearch();
+    resetReviews();
     submitInput();
   }
 });
+
+//set products html element event Listeners
+function setProductsEventListeners() {
+  const product1 = document.querySelector(".product1");
+  const product2 = document.querySelector(".product2");
+  const product3 = document.querySelector(".product3");
+  const product4 = document.querySelector(".product4");
+  product1.addEventListener("click", () => {productHandler(products[0])});
+  product2.addEventListener("click", () => {productHandler(products[1])});
+  product3.addEventListener("click", () => {productHandler(products[2])});
+  product4.addEventListener("click", () => {productHandler(products[3])});
+}
+
+function productHandler(item){
+  console.log(item.productName);
+  renderOpinions(item);
+}
 
 // productLayout.addEventListener(click, function() {
 //   productLayout.
@@ -58,8 +76,9 @@ async function renderProducts(userInput) {
 }
 
 async function renderOpinions(userChosenProduct){
-  const opinions = await getOpinions(userChosenProduct.url);
+  const opinions = await getOpinions(userChosenProduct.url); 
   console.log(opinions);
+  resetPreviousSearch();
   const opinionsContainer = document.querySelector(".opinions");
   opinions.forEach(opinion =>{
     const opinionElement = document.createElement("article");
@@ -69,10 +88,10 @@ async function renderOpinions(userChosenProduct){
         <img src=${getLogoOpinionSource(opinion.sourcePage)} alt="opinion provider logo">
       </div>
       <div class="opinion-rating_description">
-        <h2>${opinion.Rating}</h2>
+        <h2>ocena: ${opinion.rating}</h2>
         <p>${opinion.reviewContent}</p>
       <div class="author-info">        
-        <p>${opinion.userName}</p>
+        // <p>${opinion.userName}</p>
       </div>
     `;
     opinionsContainer.appendChild(opinionElement);
@@ -116,13 +135,18 @@ function resetPreviousSearch(){
   const newProducts = document.createElement('div');
   newProducts.classList.add('products');
   previousProducts.parentNode.replaceChild(newProducts, previousProducts);
-  
-
   //repositioning of search input
-  const searchContainer= document.querySelector(".search-container");
+  const searchContainer = document.querySelector(".search-container");
   searchContainer.classList.add("with-products");
   // const searchInput = document.querySelector("#search-input");
   // searchInput.classList.add("with-products");
+}
+
+function resetReviews(){
+  const reviews = document.querySelector(".opinions"); 
+  const newReviews = document.createElement('div');
+  newReviews.classList.add('opinions');
+  reviews.parentNode.replaceChild(newReviews, reviews);
 }
 
 function getLogoOpinionSource(sourcePageUrl) {
@@ -135,18 +159,4 @@ function getLogoOpinionSource(sourcePageUrl) {
   return opinionSourceLogo;
 }
 
-function setProductsEventListeners() {
-  const product1 = document.querySelector(".product1");
-  const product2 = document.querySelector(".product2");
-  const product3 = document.querySelector(".product3");
-  const product4 = document.querySelector(".product4");
-  product1.addEventListener("click", () => {productHandler(products[0])});
-  product2.addEventListener("click", () => {productHandler(products[1])});
-  product3.addEventListener("click", () => {productHandler(products[2])});
-  product4.addEventListener("click", () => {productHandler(products[3])});
-}
 
-function productHandler(item){
-  console.log(item.productName);
-  renderOpinions(item);
-}
