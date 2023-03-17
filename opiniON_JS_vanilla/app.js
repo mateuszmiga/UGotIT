@@ -6,26 +6,19 @@ const ceneoLogoUrl = 'https://www.ceneo.pl/Content/img/icons/logo-ceneo-simple-o
 const noNameLogoUrl = '';
 const searchProductUrl = "https://localhost:7042/api/Product?productName=";
 const opinionUrl = 'https://localhost:7042/api/Review?productUrl=https%3A%2F%2F';
-let products;
+let products = ['girls','just','wanna','have','fun'];
 
 const input = document.getElementById("search-input");
 const searchContainer = document.querySelector(".search-container");
-let product1; 
-let product2; 
-let product3; 
-let product4; 
 
+
+//Event listeners
 input.addEventListener("keyup", function(event) {
   if (event.keyCode === 13) {
     resetPreviousSearch();
     submitInput();
   }
 });
-
-if (product1 != null) {
-  product1.addEventListener('click', function() {
-    productHandler(products[0]);
-})}
 
 // productLayout.addEventListener(click, function() {
 //   productLayout.
@@ -36,11 +29,6 @@ function submitInput() {
   console.log(userInput);
   // searchContainer.classList.add("hidden");
   renderProducts(userInput);
-}
-
-
-function productHandler(item){
-  console.log(item.productName);
 }
 
 
@@ -79,10 +67,7 @@ async function renderProducts(userInput) {
     i ++;
     productsContainer.appendChild(productElement);
   });
-  product1 = document.querySelector(".product1");
-  product2 = document.querySelector(".product2");
-  product3 = document.querySelector(".product3");
-  product4 = document.querySelector(".product4");
+  setProductsEventListeners();
 }
 
 async function renderOpinions(userChosenProduct){
@@ -94,10 +79,10 @@ async function renderOpinions(userChosenProduct){
     opinionElement.classList.add("opinion");
     productElement.innerHTML = `
       <div>
-        <img src=${getLogoOpinionSource(opinion.sourcePage)} alt="Author Profile Pic">
+        <img src=${getLogoOpinionSource(opinion.sourcePage)} alt="opinion provider logo">
       </div>
       <div>
-        <h2>Ipnone 14 max pro</h2>
+        <h2>${opinion.Rating}</h2>
         <p>Article content goes here.</p>
       <div class="author-info">
     `;
@@ -106,7 +91,11 @@ async function renderOpinions(userChosenProduct){
 
 //sending GET request to obtain opinions for pointed product
 async function getOpinions(productUrl) {
-  const getOpinionsUrl = `${opinionUrl}${productUrl}`;
+  const productSlicedUrl = productUrl
+  .slice(8)
+  .replace("/","%");
+  
+  const getOpinionsUrl = `${opinionUrl}${productSlicedUrl}`;
   try {
     const response = await fetch(getOpinionsUrl);
     const opinionsJson = await response.json();
@@ -140,5 +129,21 @@ function getLogoOpinionSource(sourcePageUrl) {
   else if (sourcePageUrl.includes("komputronik")) opinionSourceLogo = komputronikLogoUrl;
   if (sourcePageUrl.includes("ceneo")) opinionSourceLogo = ceneoLogoUrl;
   else opinionSourceLogo = noNameLogoUrl;
+  return opinionSourceLogo;
 }
 
+function setProductsEventListeners() {
+  const product1 = document.querySelector(".product1");
+  const product2 = document.querySelector(".product2");
+  const product3 = document.querySelector(".product3");
+  const product4 = document.querySelector(".product4");
+  product1.addEventListener("click", () => {productHandler(products[0])});
+  product2.addEventListener("click", () => {productHandler(products[1])});
+  product3.addEventListener("click", () => {productHandler(products[2])});
+  product4.addEventListener("click", () => {productHandler(products[3])});
+}
+
+function productHandler(item){
+  console.log(item.productName);
+  renderOpinions(item);
+}
