@@ -30,7 +30,7 @@ body {
   }
   
   main {
-    max-width: 800px;
+    max-width: 60%;
     margin: 0 auto;
     padding: 20px;
   }
@@ -98,6 +98,9 @@ body {
   }
 
   .products {
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
     margin-bottom: 10%;
   }
 
@@ -115,24 +118,51 @@ body {
   }
 
   img{
-    height: 100%;
+    width: 100%;
   }
 
+  
   .product-description {
     display: inline-block;
     position: absolute;
   }
   
+  /* .logo-img {
+    width: 25%;
+    height: 150px;
+    border-radius: 30%;
+    margin-right: 10px;
+  } */
 
+.opinion {
+  margin-bottom: 1rem;
+}
+
+  .opinion-img {
+    display: inline-block;
+    width: 25%;
+    /* padding: 1.6rem; */
+    box-sizing: border-box;
+    text-align: center;
+    height: 200px;
+  }
+
+  .opinion-description {
+    display: inline-block;
+    /* position: absolute; */
+    width: 70%;
+    margin-left: 3%;
+  }
 
 
   article div{
-    margin-bottom: 40px;
-    display: block;
+    margin-bottom: 1.5rem;
+    display: inline-block;
   }
   
   article h2 {
     margin-top: 0;
+    font-size: 1.2em;
   }
   
   .author-info {
@@ -140,12 +170,12 @@ body {
     align-items: center;
   }
   
-  article img {
+  /* article img {
     width: 150px;
     height: 150px;
     border-radius: 30%;
     margin-right: 10px;
-  }
+  } */
   
   footer {
   
@@ -158,3 +188,4 @@ body {
     width: 100%;
     text-align: center;
   }
+

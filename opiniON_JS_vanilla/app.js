@@ -1,6 +1,6 @@
 
 const amazonLogoUrl = 'https://www.logo.wine/a/logo/Amazon_(company)/Amazon_(company)-Logo.wine.svg';
-const x_comLogoUrl = 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/X-kom_logo_ver2018.png/240px-X-kom_logo_ver2018.png';
+const x_comLogoUrl = 'https://prowly-uploads.s3.eu-west-1.amazonaws.com/uploads/press_rooms/company_logos/2750/a9a326b207f68f36e097fbf9bc9abd69.png';
 const komputronikLogoUrl = 'https://prowly-uploads.s3.eu-west-1.amazonaws.com/uploads/press_rooms/company_logos/1209/72b83a4a25be6621ae462be8af6edc3f.jpg';
 const ceneoLogoUrl = 'https://www.ceneo.pl/Content/img/icons/logo-ceneo-simple-orange.svg';
 const noNameLogoUrl = '';
@@ -52,7 +52,6 @@ async function renderProducts(userInput) {
       </div>
       <div class="product-description">
         <h2>${product.productName}</h2>
-        <p>${product.url}</p>
       </div>
     `;
     i ++;
@@ -66,19 +65,32 @@ async function renderOpinions(userChosenProduct){
   console.log(opinions);
   resetPreviousSearch();
   const opinionsContainer = document.querySelector(".opinions");
+  
+  const productsCont= document.querySelector(".products");
+  const productElement = document.createElement("div");
+
+  productElement.classList.add(`product`);
+  productElement.innerHTML = `
+    <div class="product-img">
+      <img src=\"https:${userChosenProduct.photoUrl}\">
+    </div>
+    <div class="product-description">
+      <h2>${userChosenProduct.productName}</h2>
+    </div>
+  `;
+  productsCont.appendChild(productElement);
+
   opinions.forEach(opinion =>{
     const opinionElement = document.createElement("article");
     opinionElement.classList.add("opinion");
     opinionElement.innerHTML = `
-      <div class="logo-img">
+      <div class="opinion-img">
         <img src=${getLogoOpinionSource(opinion.sourcePage)} alt="opinion-provider-logo">
       </div>
-      <div class="opinion-rating_description">
+      <div class="opinion-description">
         <h2>ocena: ${opinion.rating}</h2>
         <p>${opinion.reviewContent}</p>
-      <div class="author-info">        
-        // <p>${opinion.userName}</p>
-      </div>
+        <p>author: ${opinion.userName}</p>
     `;
     opinionsContainer.appendChild(opinionElement);
   });
