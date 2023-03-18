@@ -140,7 +140,7 @@ body {
 
   .opinion-img {
     display: inline-block;
-    width: 25%;
+    width: 22%;
     /* padding: 1.6rem; */
     box-sizing: border-box;
     text-align: center;
@@ -150,7 +150,7 @@ body {
   .opinion-description {
     display: inline-block;
     /* position: absolute; */
-    width: 70%;
+    width: 74%;
     margin-left: 3%;
   }
 

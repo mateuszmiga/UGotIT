@@ -148,7 +148,7 @@ function resetReviews(){
 function getLogoOpinionSource(sourcePageUrl) {
   let opinionSourceLogo = "";
   if (sourcePageUrl.includes("amazon.pl")) opinionSourceLogo = amazonLogoUrl;
-  else if (sourcePageUrl.includes("x-com")) opinionSourceLogo = x_comLogoUrl;
+  else if (sourcePageUrl.includes("x-kom")) opinionSourceLogo = x_comLogoUrl;
   else if (sourcePageUrl.includes("komputronik")) opinionSourceLogo = komputronikLogoUrl;
   else if (sourcePageUrl.includes("ceneo")) opinionSourceLogo = ceneoLogoUrl;
   else opinionSourceLogo = noNameLogoUrl;
