@@ -1,5 +1,5 @@
 
-const amazonLogoUrl = 'https://img.etimg.com/thumb/msid-59738992,width-640,resizemode-4,imgsize-25499/amazon.jpg';
+const amazonLogoUrl = 'https://www.logo.wine/a/logo/Amazon_(company)/Amazon_(company)-Logo.wine.svg';
 const x_comLogoUrl = 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/X-kom_logo_ver2018.png/240px-X-kom_logo_ver2018.png';
 const komputronikLogoUrl = 'https://prowly-uploads.s3.eu-west-1.amazonaws.com/uploads/press_rooms/company_logos/1209/72b83a4a25be6621ae462be8af6edc3f.jpg';
 const ceneoLogoUrl = 'https://www.ceneo.pl/Content/img/icons/logo-ceneo-simple-orange.svg';
@@ -11,7 +11,6 @@ let products = ['girls','just','wanna','have','fun'];
 const input = document.getElementById("search-input");
 const searchContainer = document.querySelector(".search-container");
 
-
 //Event listeners
 input.addEventListener("keyup", function(event) {
   if (event.keyCode === 13) {
@@ -20,18 +19,6 @@ input.addEventListener("keyup", function(event) {
     submitInput();
   }
 });
-
-//set products html element event Listeners
-function setProductsEventListeners() {
-  const product1 = document.querySelector(".product1");
-  const product2 = document.querySelector(".product2");
-  const product3 = document.querySelector(".product3");
-  const product4 = document.querySelector(".product4");
-  product1.addEventListener("click", () => {productHandler(products[0])});
-  product2.addEventListener("click", () => {productHandler(products[1])});
-  product3.addEventListener("click", () => {productHandler(products[2])});
-  product4.addEventListener("click", () => {productHandler(products[3])});
-}
 
 function productHandler(item){
   console.log(item.productName);
@@ -48,7 +35,6 @@ function submitInput() {
   // searchContainer.classList.add("hidden");
   renderProducts(userInput);
 }
-
 
 async function renderProducts(userInput) {
   products = await getProducts(userInput);
@@ -85,7 +71,7 @@ async function renderOpinions(userChosenProduct){
     opinionElement.classList.add("opinion");
     opinionElement.innerHTML = `
       <div class="logo-img">
-        <img src=${getLogoOpinionSource(opinion.sourcePage)} alt="opinion provider logo">
+        <img src=${getLogoOpinionSource(opinion.sourcePage)} alt="opinion-provider-logo">
       </div>
       <div class="opinion-rating_description">
         <h2>ocena: ${opinion.rating}</h2>
@@ -127,8 +113,6 @@ async function getOpinions(productUrl) {
   }
 }
 
-
-
 //reseting output of previous search - refreshing site effect without server request
 function resetPreviousSearch(){
   const previousProducts = document.querySelector(".products"); 
@@ -151,12 +135,24 @@ function resetReviews(){
 
 function getLogoOpinionSource(sourcePageUrl) {
   let opinionSourceLogo = "";
-  if (sourcePageUrl.includes("amazon")) opinionSourceLogo = amazonLogoUrl;
+  if (sourcePageUrl.includes("amazon.pl")) opinionSourceLogo = amazonLogoUrl;
   else if (sourcePageUrl.includes("x-com")) opinionSourceLogo = x_comLogoUrl;
   else if (sourcePageUrl.includes("komputronik")) opinionSourceLogo = komputronikLogoUrl;
-  if (sourcePageUrl.includes("ceneo")) opinionSourceLogo = ceneoLogoUrl;
+  else if (sourcePageUrl.includes("ceneo")) opinionSourceLogo = ceneoLogoUrl;
   else opinionSourceLogo = noNameLogoUrl;
   return opinionSourceLogo;
+}
+
+//set products html element event Listeners
+function setProductsEventListeners() {
+  const product1 = document.querySelector(".product1");
+  const product2 = document.querySelector(".product2");
+  const product3 = document.querySelector(".product3");
+  const product4 = document.querySelector(".product4");
+  product1.addEventListener("click", () => {productHandler(products[0])});
+  product2.addEventListener("click", () => {productHandler(products[1])});
+  product3.addEventListener("click", () => {productHandler(products[2])});
+  product4.addEventListener("click", () => {productHandler(products[3])});
 }
 
 
