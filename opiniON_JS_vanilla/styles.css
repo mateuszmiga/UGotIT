@@ -102,11 +102,17 @@ body {
     margin-left: 10%;
     margin-right: 10%;
     margin-bottom: 10%;
+    /* border-top: 0.0625rem solid #e2e2e2; */
   }
 
-  .product {
+  .product1 , .product2 , .product3 , .product4 {
     margin: 2% 0%;
+    /* border-top: 0.0625rem solid #e2e2e2; */
   }
+
+  /* .product.revied {
+    border-bottom: solid black;
+  } */
 
   .product-img {
     display: inline-block;
@@ -134,8 +140,10 @@ body {
     margin-right: 10px;
   } */
 
+
 .opinion {
-  margin-bottom: 1rem;
+  padding-top: 1%;
+  border-top: 0.0625rem solid #e2e2e2
 }
 
   .opinion-img {
@@ -144,7 +152,7 @@ body {
     /* padding: 1.6rem; */
     box-sizing: border-box;
     text-align: center;
-    height: 200px;
+    height: 7rem;
   }
 
   .opinion-description {
@@ -155,10 +163,10 @@ body {
   }
 
 
-  article div{
+  /* article div{
     margin-bottom: 1.5rem;
     display: inline-block;
-  }
+  } */
   
   article h2 {
     margin-top: 0;

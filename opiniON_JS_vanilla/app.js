@@ -2,7 +2,7 @@
 const amazonLogoUrl = 'https://www.logo.wine/a/logo/Amazon_(company)/Amazon_(company)-Logo.wine.svg';
 const x_comLogoUrl = 'https://prowly-uploads.s3.eu-west-1.amazonaws.com/uploads/press_rooms/company_logos/2750/a9a326b207f68f36e097fbf9bc9abd69.png';
 const komputronikLogoUrl = 'https://prowly-uploads.s3.eu-west-1.amazonaws.com/uploads/press_rooms/company_logos/1209/72b83a4a25be6621ae462be8af6edc3f.jpg';
-const ceneoLogoUrl = 'https://www.ceneo.pl/Content/img/icons/logo-ceneo-simple-orange.svg';
+const ceneoLogoUrl = 'https://static.wirtualnemedia.pl/media/top/ceneo-logo655.jpg';
 const noNameLogoUrl = '';
 const searchProductUrl = "https://localhost:7042/api/Product?productName=";
 const opinionUrl = 'https://localhost:7042/api/Review?productUrl=https%3A%2F%2F';
@@ -65,10 +65,11 @@ async function renderOpinions(userChosenProduct){
   console.log(opinions);
   resetPreviousSearch();
   const opinionsContainer = document.querySelector(".opinions");
+  // opinionsContainer.style.borderTop = "thick solid #06070a";
   
   const productsCont= document.querySelector(".products");
+  productsCont.style.marginBottom = "4%";
   const productElement = document.createElement("div");
-
   productElement.classList.add(`product`);
   productElement.innerHTML = `
     <div class="product-img">
