@@ -8,8 +8,7 @@ using WebScraper.Models;
 namespace UGotIT.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
-    [EnableCors("AllowSpecificOrigin")]
+    [ApiController]    
     public class ReviewController : ControllerBase
     {
         private readonly IReviewService _reviewService;
