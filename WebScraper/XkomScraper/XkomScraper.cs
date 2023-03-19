@@ -9,13 +9,13 @@ namespace WebScraper.XkomScraper
 {
     public class XkomScraper : IDataScraper
     {
-        public ICollection<WebScraper.Models.Review> GetReviews(string productUrl)
+        public async Task<ICollection<WebScraper.Models.Review>> GetReviewsAsync(string productUrl)
         {
             var reviews = ExtractReviewsFromProductPage(productUrl);
-            return reviews;
+            return await reviews;
         }
 
-        private ICollection<WebScraper.Models.Review> ExtractReviewsFromProductPage(string url)
+        private async Task<ICollection<WebScraper.Models.Review>> ExtractReviewsFromProductPage(string url)
         {
             if (url != string.Empty)
             {

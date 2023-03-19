@@ -10,6 +10,6 @@ namespace WebScraper
     public interface IDataScraper
     {
         
-        public ICollection<Review> GetReviews(string productName);
+        public Task<ICollection<Review>> GetReviewsAsync(string productName);
     }
 }

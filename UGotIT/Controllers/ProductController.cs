@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
 using UGotIT.Services;
 using WebScraper.Models;
 
@@ -8,6 +9,7 @@ namespace UGotIT.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("AllowSpecificOrigin")]
     public class ProductController : ControllerBase
     {
 
@@ -19,9 +21,9 @@ namespace UGotIT.Controllers
         }
         // GET: api/<ProductController>
         [HttpGet]
-        public IEnumerable<Product> GetProducts(string productName)
+        public async Task<IEnumerable<Product>> GetProductsAsync(string productName)
         {
-            IEnumerable<Product> products = _reviewService.GetProducts(productName);
+            IEnumerable<Product> products =await _reviewService.GetProductsAsync(productName);
 
             return products;
         }

@@ -1,0 +1,18 @@
+﻿@model IEnumerable<OpinionMVC.Models.Review>
+
+@{
+    ViewData["Title"] = "Reviews";
+}
+
+
+<h1>Znalezione Opinie</h1>
+<div class="opinions">
+    @foreach (var item in Model) {
+        <div class="opinion">
+            <h2>@Html.DisplayFor(modelItem => item.UserName)</h2>
+            <div class="rating">@Html.DisplayFor(modelItem => item.Rating)</div>
+            <p>@Html.DisplayFor(modelItem => item.ReviewContent)</p>
+            <p>Źródło: @Html.DisplayFor(modelItem => item.SourcePage)</p>
+        </div>
+    }
+</div>

@@ -13,7 +13,7 @@ namespace WebScraper.Finder
         private const string BaseUrl = "https://www.ceneo.pl/;szukaj-";
         private const string BaseUrlParam = "?nocatnarrow=1";
 
-        public ICollection<Product> FindProduct(string productName)
+        public async Task<ICollection<Product>> FindProduct(string productName)
         {
             var searchQuery = productName.Split(' '); 
             var web = new HtmlWeb();

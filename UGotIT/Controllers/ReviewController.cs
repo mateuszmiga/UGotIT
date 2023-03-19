@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
 using UGotIT.Services;
 using WebScraper.Models;
 
@@ -8,6 +9,7 @@ namespace UGotIT.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("AllowSpecificOrigin")]
     public class ReviewController : ControllerBase
     {
         private readonly IReviewService _reviewService;
@@ -20,11 +22,11 @@ namespace UGotIT.Controllers
 
         // GET: api/<ReviewController>
         [HttpGet]
-        public IEnumerable<Review> Get(string productUrl)
+        public async Task<IEnumerable<Review>> GetAsync(string productUrl)
         {
-            IEnumerable<Review> reviews = _reviewService.GetAllReviews(productUrl);
-            
-            return reviews;
+            IEnumerable<Review> reviews = await _reviewService.GetAllReviewsAsync(productUrl);
+            var sorted = reviews.OrderByDescending(c => c.ReviewContent.Length);
+            return sorted;
         } 
     }
 }
