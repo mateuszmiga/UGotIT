@@ -61,7 +61,10 @@ async function renderProducts(userInput) {
 }
 
 async function renderOpinions(userChosenProduct){
+  const backdrop = document.querySelector('.backdrop');
+  backdrop.style.display = "block";
   const opinions = await getOpinions(userChosenProduct.url); 
+  backdrop.style.display = "none";
   console.log(opinions);
   resetPreviousSearch();
   const opinionsContainer = document.querySelector(".opinions");
