@@ -107,8 +107,17 @@ body {
 
   .product1 , .product2 , .product3 , .product4 {
     margin: 2% 0%;
+    cursor: pointer;
     /* border-top: 0.0625rem solid #e2e2e2; */
   }
+
+  .product1:hover,
+  .product2:hover,
+  .product3:hover,
+  .product4:hover {
+    background-color: #f1f6fb;
+  }
+
 
   /* .product.revied {
     border-bottom: solid black;
@@ -152,7 +161,7 @@ body {
     /* padding: 1.6rem; */
     box-sizing: border-box;
     text-align: center;
-    height: 7rem;
+    /* height: 7rem; */
   }
 
   .opinion-description {
