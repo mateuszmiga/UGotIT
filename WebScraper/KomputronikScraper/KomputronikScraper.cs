@@ -32,11 +32,12 @@ namespace WebScraper.KomputronikScraper
 
                 try
                 {
-                    var review = new Review();
+
                     var docJson = JsonConvert.DeserializeObject<Root>(Json.InnerHtml);
 
                     foreach (var reviewNode in reviewNodes)
                     {
+                        var review = new Review();
                         review.ReviewContent =  reviewNode.QuerySelector("div.text-base.text-gray-gravel").InnerText.Trim();
                         review.Rating = reviewNode.QuerySelector("ktr-star-rating").Attributes["rating"].Value;
                         review.SourcePage = productUrl;
