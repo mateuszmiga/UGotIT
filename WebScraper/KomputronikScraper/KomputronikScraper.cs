@@ -42,12 +42,6 @@ namespace WebScraper.KomputronikScraper
                         review.Rating = reviewNode.QuerySelector("ktr-star-rating").Attributes["rating"].Value;
                         review.SourcePage = productUrl;
                         review.UserName = reviewNode.QuerySelector("span.font-semibold").InnerText.Trim();
-                      
-/*                        review.UserName = 
-                        review.ReviewContent = reviewNode.QuerySelector(".a-expander-content.reviewText.review-text-content.a-expander-partial-collapse-content").QuerySelector("span").InnerText;
-                        review.SourcePage = productUrl;*/
-/*                        review.Rating = docJson.ratingValue.ToString();*/
-
                         reviews.Add(review);
                     }
 
