@@ -4,10 +4,14 @@ const x_comLogoUrl = 'https://prowly-uploads.s3.eu-west-1.amazonaws.com/uploads/
 const komputronikLogoUrl = 'https://prowly-uploads.s3.eu-west-1.amazonaws.com/uploads/press_rooms/company_logos/1209/72b83a4a25be6621ae462be8af6edc3f.jpg';
 const ceneoLogoUrl = 'https://static.wirtualnemedia.pl/media/top/ceneo-logo655.jpg';
 const noNameLogoUrl = '';
-const searchProductUrl = "https://localhost:7042/api/Product?productName=";
-const opinionUrl = 'https://localhost:7042/api/Review?productUrl=https%3A%2F%2F';
-let products = ['girls','just','wanna','have','fun'];
 
+// const searchProductUrl = "https://localhost:7042/api/Product?productName=";
+const searchProductUrl = "http://opinion-env.eba-nx7fx87d.eu-west-1.elasticbeanstalk.com/api/Product?productName=";
+
+// const opinionUrl = 'https://localhost:7042/api/Review?productUrl=https%3A%2F%2F';
+const opinionUrl = 'http://opinion-env.eba-nx7fx87d.eu-west-1.elasticbeanstalk.com/api/Review?productUrl=https%3A%2F%2F';
+
+let products = ['girls','just','wanna','have','fun'];
 const input = document.getElementById("search-input");
 const searchContainer = document.querySelector(".search-container");
 
