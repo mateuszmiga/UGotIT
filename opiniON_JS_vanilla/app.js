@@ -6,10 +6,10 @@ const ceneoLogoUrl = 'https://static.wirtualnemedia.pl/media/top/ceneo-logo655.j
 const noNameLogoUrl = '';
 
 // const searchProductUrl = "https://localhost:7042/api/Product?productName=";
-const searchProductUrl = "https://opinion-env.eba-nx7fx87d.eu-west-1.elasticbeanstalk.com/api/Product?productName=";
+const searchProductUrl = "http://opinion-env.eba-nx7fx87d.eu-west-1.elasticbeanstalk.com/api/Product?productName=";
 
 // const opinionUrl = 'https://localhost:7042/api/Review?productUrl=https%3A%2F%2F';
-const opinionUrl = 'https://opinion-env.eba-nx7fx87d.eu-west-1.elasticbeanstalk.com/api/Review?productUrl=https%3A%2F%2F';
+const opinionUrl = 'http://opinion-env.eba-nx7fx87d.eu-west-1.elasticbeanstalk.com/api/Review?productUrl=https%3A%2F%2F';
 
 let products = ['girls','just','wanna','have','fun'];
 const input = document.getElementById("search-input");
